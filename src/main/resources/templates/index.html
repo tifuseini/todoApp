@@ -50,17 +50,29 @@
         <!-- This should be `0 items left` by default -->
         <span class="todo-count"><strong>0</strong> item left</span>
         <!-- Remove this if you don't implement routing -->
-        <ul class="filters">
-            <li>
-                <a class="selected" href="#/">All</a>
+        <ul class="todo-list" th:remove="all-but-first">
+            <li th:insert="fragments :: todoItem(${item})" th:each="item : ${todos}" th:remove="tag">
+            </li>
+            </li>
+            <li class="completed">
+                ...
             </li>
             <li>
-                <a href="#/active">Active</a>
-            </li>
-            <li>
-                <a href="#/completed">Completed</a>
+                ...
             </li>
         </ul>
+
+        <!--        <ul class="filters">-->
+<!--            <li>-->
+<!--                <a class="selected" href="#/">All</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="#/active">Active</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="#/completed">Completed</a>-->
+<!--            </li>-->
+<!--        </ul>-->
         <!-- Hidden if no completed items are left ↓ -->
         <button class="clear-completed">Clear completed</button>
     </footer>
@@ -76,4 +88,5 @@
 <!-- Scripts here. Don't remove ↓ -->
 <script th:src="@{/webjars/todomvc-common/base.js}"></script>
 </body>
+
 </html>
