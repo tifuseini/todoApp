@@ -1,4 +1,8 @@
 package com.tifuseini.tutorials.todomvcthymeleaf;
 
-public class TodoItemRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TodoItemRepository extends JpaRepository<TodoItem, Long> {
+
 }
+
