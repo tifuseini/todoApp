@@ -1,4 +1,13 @@
 package com.tifuseini.tutorials.todomvcthymeleaf;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/")
 public class TodoItemcontroller {
+
+    private String index() {
+        return "index";
+    }
 }
