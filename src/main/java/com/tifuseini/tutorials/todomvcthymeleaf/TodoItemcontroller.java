@@ -21,6 +21,7 @@ public class TodoItemcontroller {
         model.addAttribute("item", new TodoItemFormData());
         model.addAttribute("todos",getTodoItems());
         model.addAttribute("totalNumberOfItems",todoItemRepository.count());
+        model.addAttribute("numberOfActiveItems", todoItemRepository.countByCompleted(false));
         return "index";
     }
 
@@ -48,6 +49,12 @@ public class TodoItemcontroller {
                         .orElseThrow(() -> new TodoItemNotFoundException(id));
         todoItem.setCompleted(!todoItem.isCompleted());
         todoItemRepository.save(todoItem);
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteTodoItem(@PathVariable("id") long id) {
+        todoItemRepository.deleteById(id);
         return "redirect:/";
     }
 }
