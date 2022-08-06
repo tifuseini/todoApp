@@ -3,10 +3,7 @@ package com.tifuseini.tutorials.todomvcthymeleaf;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -42,6 +39,15 @@ public class TodoItemcontroller {
     @PostMapping
     public String addTodoItem(@Valid @ModelAttribute("item") TodoItemFormData formData) {
         todoItemRepository.save(new TodoItem(formData.getTitle()));
+        return "redirect:/";
+    }
+
+    @PutMapping("/{id}/toggle")
+    public String toggleSelection(@PathVariable("id") long id) {
+        TodoItem todoItem = todoItemRepository.findById(id)
+                        .orElseThrow(() -> new TodoItemNotFoundException(id));
+        todoItem.setCompleted(!todoItem.isCompleted());
+        todoItemRepository.save(todoItem);
         return "redirect:/";
     }
 }
