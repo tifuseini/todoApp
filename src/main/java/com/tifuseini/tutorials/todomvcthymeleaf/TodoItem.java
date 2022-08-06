@@ -28,9 +28,7 @@ public class TodoItem {
         this.title = title;
     }
 
-    public enum ListFilter {
-        ALL,
-        ACTIVE,
-        COMPLETED
-    }
+
 }
+
+
